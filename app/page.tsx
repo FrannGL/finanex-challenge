@@ -1,8 +1,10 @@
 "use client";
+import Map from "@/components/Map";
 import { title } from "@/components/primitives";
 import Row from "@/components/Row";
 import data from "@/data/data.json";
 import { formatDate } from "@/utils/formatDate";
+import { handleShowToast } from "@/utils/toast";
 import {
 	Button,
 	Card,
@@ -22,14 +24,14 @@ import {
 	TableColumn,
 	TableHeader,
 	TableRow,
-	useDisclosure,
+	useDisclosure
 } from "@nextui-org/react";
 import { Snippet } from "@nextui-org/snippet";
 import { useState } from "react";
-import { handleShowToast } from "@/utils/toast";
 
 export default function Home() {
 	const { isOpen, onOpen, onClose } = useDisclosure();
+	const { isOpen: isRouteOpen, onOpen: onRouteOpen, onClose: onRouteClose } = useDisclosure();
 	const [size] = useState<"4xl" | "5xl" | "full">("5xl");
 
 	const container = data.containers[0];
@@ -75,7 +77,7 @@ export default function Home() {
 						/>
 						<Row
 							label="Importe de la Factura"
-							value={`$${Math.round(Number(data.invoice_amount)).toLocaleString()} .-`}
+							value={`USD ${Math.round(Number(data.invoice_amount)).toLocaleString()} .-`}
 						/>
 					</div>
 				</CardBody>
@@ -152,8 +154,26 @@ export default function Home() {
 									</TableBody>
 								</Table>
 							</ModalBody>
+
 							<ModalFooter>
+								<Button color="primary" variant="flat" onPress={onRouteOpen}>
+									VER RECORRIDO
+								</Button>
 								<Button onPress={onClose}>Cerrar</Button>
+							</ModalFooter>
+						</>
+					)}
+				</ModalContent>
+			</Modal>
+			<Modal size={size} isOpen={isRouteOpen} onClose={onRouteClose}>
+				<ModalContent>
+					{onRouteClose => (
+						<>
+							<ModalBody>
+								<Map />
+							</ModalBody>
+							<ModalFooter>
+								<Button onPress={onRouteClose}>Cerrar</Button>
 							</ModalFooter>
 						</>
 					)}
