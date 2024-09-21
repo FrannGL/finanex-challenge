@@ -27,36 +27,16 @@ export const siteConfig = {
   ],
   navMenuItems: [
     {
-      label: "Profile",
-      href: "/profile",
+      label: "Github",
+      href: "https://github.com/FrannGL",
     },
     {
-      label: "Dashboard",
-      href: "/dashboard",
+      label: "Discord",
+      href: "https://discord.com/users/707360728910266458",
     },
     {
-      label: "Projects",
-      href: "/projects",
-    },
-    {
-      label: "Team",
-      href: "/team",
-    },
-    {
-      label: "Calendar",
-      href: "/calendar",
-    },
-    {
-      label: "Settings",
-      href: "/settings",
-    },
-    {
-      label: "Help & Feedback",
-      href: "/help-feedback",
-    },
-    {
-      label: "Logout",
-      href: "/logout",
+      label: "Portfolio",
+      href: "https://franngl.vercel.app/en",
     },
   ],
   links: {

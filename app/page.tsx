@@ -24,7 +24,8 @@ import {
 	TableColumn,
 	TableHeader,
 	TableRow,
-	useDisclosure
+	Tooltip,
+	useDisclosure,
 } from "@nextui-org/react";
 import { Snippet } from "@nextui-org/snippet";
 import { useState } from "react";
@@ -46,7 +47,7 @@ export default function Home() {
 		<section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
 			<div className="inline-block max-w-xl text-center justify-center">
 				<span className={title()}>
-					Seguimiento en tiempo real de tu contenedor con{" "}
+					Seguimiento en tiempo real de tus contenedores con{" "}
 					<span className={title({ color: "blue" })}>Bill of Lading (BL)&nbsp;</span>
 					&nbsp;
 				</span>
@@ -141,7 +142,21 @@ export default function Home() {
 											<TableRow key={index}>
 												<TableCell>{formatDate(event.event_date)}</TableCell>
 												<TableCell>{event.type.toLocaleUpperCase()}</TableCell>
-												<TableCell>{event.description}</TableCell>
+												<TableCell>
+													<div className="description-cell">
+														<span>{event.description}</span>
+														{event.facility?.name && (
+															<Tooltip content={event.facility?.name || "No facility name available"}>
+																<span
+																	className="info-icon"
+																	style={{ marginLeft: 8, cursor: "pointer", color: "#0070f3" }}
+																>
+																	i
+																</span>
+															</Tooltip>
+														)}
+													</div>
+												</TableCell>
 												<TableCell>{event.vessel?.name ? `${event.vessel?.name} ${event.voyage}` : "-"}</TableCell>
 												<TableCell>
 													{event.location.state
